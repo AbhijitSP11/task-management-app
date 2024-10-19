@@ -7,7 +7,7 @@ import Modal from '@/components/Modal';
 import TaskForm from '@/components/TaskForm';
 import EditTaskModal from '@/components/EditTaskModal';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { setAllTasks } from '@/redux/slices/taskSlice';
+import { addTask, setAllTasks } from '@/redux/slices/taskSlice';
 import { PlusCircle } from 'lucide-react';
 
 const TasksPage = ({ initialTasks }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -20,6 +20,7 @@ const TasksPage = ({ initialTasks }: InferGetServerSidePropsType<typeof getServe
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 10;
   const selectedTaskId = useAppSelector((state) => state.task.selectedTaskId);
+  
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const TasksPage = ({ initialTasks }: InferGetServerSidePropsType<typeof getServe
 
   const handleAddTask = (newTask: Partial<Task>) => {
     const task = { ...newTask, id: Date.now() } as Task;
+    dispatch(addTask(task));
     setTasks(prev => [...prev, task]);
     setCurrentPage(1);
   };

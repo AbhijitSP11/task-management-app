@@ -60,7 +60,7 @@ const TaskRow: React.FC<TaskRowProps> = ({ task, onEditTask, onDeleteTask }) => 
       <td className='px-6 py-4'>{getStatusIcon(task.status || '')}</td>
       <td className='px-6 py-4'>{task.title}</td>
       <td className='px-6 py-4'>{task.description}</td>
-      <td className='px-6 py-4'>{task.assignedUserId}</td>
+      <td className='px-6 py-4'>{task.author}</td>
       <td className='px-6 py-4'>{formatDate(task.dueDate)}</td>
       <td className='px-6 py-4'>{formatDate(task.startDate)}</td>
       <td className='px-6 py-4'>

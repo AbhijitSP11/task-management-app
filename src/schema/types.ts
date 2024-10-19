@@ -34,15 +34,15 @@ export type User = {
     id: number;
     title: string;
     description?: string;
-    status?: string;
-    priority?: string;
-    startDate?: string;
-    dueDate?: string;
-    projectId: number;
-    authorUserId: number;
+    status: string;
+    priority: string;
+    startDate: string;
+    dueDate: string;
+    projectId?: number;
+    authorUserId?: number;
     assignedUserId?: number;
-    project: Project;
-    author: string;
+    project?: Project;
+    author?: string;
     assignee?: string;
   };
   

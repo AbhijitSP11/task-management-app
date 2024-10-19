@@ -7,26 +7,31 @@ import Modal from '@/components/Modal';
 import TaskForm from '@/components/TaskForm';
 import EditTaskModal from '@/components/EditTaskModal';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { setAllTasks } from '@/redux/slices/taskSlice';
+import { addTask, setAllTasks, updateTask, deleteTask } from '@/redux/slices/taskSlice';
 import { PlusCircle } from 'lucide-react';
 import Head from 'next/head';
 
 export default function Home ({ initialTasks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const [tasks, setTasks] = useState(initialTasks);
-
+  
+  const tasks = useAppSelector((state) => state.task.allTasks);
   const selectedTaskId = useAppSelector((state) => state.task.selectedTaskId);
+  
   const [sortColumn, setSortColumn] = useState<keyof Task>('priority');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 10;
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setAllTasks(initialTasks));
-  }, [dispatch, initialTasks]);
+    // Only set initial tasks if the Redux state is empty
+    if (tasks.length === 0) {
+      dispatch(setAllTasks(initialTasks));
+    }
+  }, [dispatch, initialTasks, tasks.length]);
 
   const priorityOrder = useMemo(() => new Map([
     ['High', 0],
@@ -68,16 +73,16 @@ export default function Home ({ initialTasks }: InferGetServerSidePropsType<type
 
   const handleAddTask = (newTask: Partial<Task>) => {
     const task = { ...newTask, id: Date.now() } as Task;
-    setTasks(prev => [task, ...prev]);
+    dispatch(addTask(task));
     setCurrentPage(1);
   };
 
   const handleUpdateTask = (updatedTask: Task) => {
-    setTasks(prev => prev.map(task => task.id === updatedTask.id ? updatedTask : task));
+    dispatch(updateTask(updatedTask));
   };
 
   const handleDeleteTask = (taskId: number) => {
-    setTasks(prev => prev.filter(task => task.id !== taskId));
+    dispatch(deleteTask(taskId));
     setCurrentPage(1);
   };
 
