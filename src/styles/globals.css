@@ -2,9 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.app {
   --background: #ffffff;
   --foreground: #171717;
+  @apply text-sm;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +34,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
