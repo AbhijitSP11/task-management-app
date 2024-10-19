@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Task } from '@/schema/types';
 import TaskTable from '@/components/TaskTable';
@@ -6,7 +6,6 @@ import Pagination from '@/components/Pagination';
 import Modal from '@/components/Modal';
 import TaskForm from '@/components/TaskForm';
 import EditTaskModal from '@/components/EditTaskModal';
-import useTasks from '@/hooks/useTasks';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { setAllTasks } from '@/redux/slices/taskSlice';
 import { PlusCircle } from 'lucide-react';
@@ -14,24 +13,70 @@ import { PlusCircle } from 'lucide-react';
 const TasksPage = ({ initialTasks }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [tasks, setTasks] = useState(initialTasks);
+  const [sortColumn, setSortColumn] = useState<keyof Task>('priority');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 10;
   const selectedTaskId = useAppSelector((state) => state.task.selectedTaskId);
-  const {
-    currentTasks,
-    sortColumn,
-    sortDirection,
-    currentPage,
-    totalPages,
-    handleSort,
-    handleAddTask,
-    handleUpdateTask,
-    handleDeleteTask,
-    setCurrentPage,
-  } = useTasks(initialTasks);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setAllTasks(initialTasks));
   }, [dispatch, initialTasks]);
+
+  const priorityOrder = useMemo(() => new Map([
+    ['High', 0],
+    ['Medium', 1],
+    ['Low', 2],
+  ]), []);
+
+  const sortedTasks = useMemo(() => {
+    return [...tasks].sort((a, b) => {
+      const priorityA = priorityOrder.get(a.priority!) ?? 3;
+      const priorityB = priorityOrder.get(b.priority!) ?? 3;
+      
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+  
+      const valueA = a[sortColumn];
+      const valueB = b[sortColumn];
+  
+      if (valueA === undefined || valueB === undefined) return 0;
+      if (valueA < valueB) return sortDirection === 'asc' ? -1 : 1;
+      if (valueA > valueB) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [tasks, sortColumn, sortDirection, priorityOrder]);
+  
+  const currentTasks = useMemo(() => {
+    const indexOfLastTask = currentPage * tasksPerPage;
+    const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+    return sortedTasks.slice(indexOfFirstTask, indexOfLastTask);
+  }, [sortedTasks, currentPage]);
+
+  const totalPages = Math.ceil(sortedTasks.length / tasksPerPage);
+
+  const handleSort = (column: keyof Task) => {
+    setSortColumn(column);
+    setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+  };
+
+  const handleAddTask = (newTask: Partial<Task>) => {
+    const task = { ...newTask, id: Date.now() } as Task;
+    setTasks(prev => [...prev, task]);
+    setCurrentPage(1);
+  };
+
+  const handleUpdateTask = (updatedTask: Task) => {
+    setTasks(prev => prev.map(task => task.id === updatedTask.id ? updatedTask : task));
+  };
+
+  const handleDeleteTask = (taskId: number) => {
+    setTasks(prev => prev.filter(task => task.id !== taskId));
+  };
 
   const onEditTask = (task: Task) => {
     setEditingTask(task);
@@ -46,14 +91,15 @@ const TasksPage = ({ initialTasks }: InferGetServerSidePropsType<typeof getServe
     setEditingTask(null);
   };
 
-  const filteredTasks = selectedTaskId
-    ? currentTasks.filter(task => task.id === selectedTaskId)
-    : currentTasks;
+  const filteredTasks = useMemo(() => {
+    return selectedTaskId
+      ? currentTasks.filter(task => task.id === selectedTaskId)
+      : currentTasks;
+  }, [selectedTaskId, currentTasks]);
 
   const onAddTask = (newTask: Partial<Task>) => {
     handleAddTask(newTask);
     setShowAddModal(false);
-    // Optionally, you can reset the current page to 1 to ensure the new task is visible
     setCurrentPage(1);
   };
 

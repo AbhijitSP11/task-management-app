@@ -11,17 +11,38 @@ interface TaskRowProps {
 
 const TaskRow: React.FC<TaskRowProps> = ({ task, onEditTask, onDeleteTask }) => {
   const getStatusIcon = (status: string) => {
+    let icon, bgColor, textColor;
+  
     switch (status) {
       case 'Completed':
-        return <CheckCircle className="w-5 h-5 text-green-500" />;
+        icon = <CheckCircle className="size-4 text-green-500" />;
+        bgColor = 'bg-green-100';
+        textColor = 'text-green-700';
+        break;
       case 'In Progress':
-        return <ArrowUpCircle className="w-5 h-5 text-yellow-500" />;
+        icon = <ArrowUpCircle className="size-4 text-yellow-500" />;
+        bgColor = 'bg-yellow-100';
+        textColor = 'text-yellow-700';
+        break;
       case 'Blocked':
-        return <AlertCircle className="w-5 h-5 text-red-500" />;
+        icon = <AlertCircle className="size-4 text-red-500" />;
+        bgColor = 'bg-red-100';
+        textColor = 'text-red-700';
+        break;
       default:
-        return <Clock className="w-5 h-5 text-blue-500" />;
+        icon = <Clock className="size-4 text-blue-500" />;
+        bgColor = 'bg-blue-100';
+        textColor = 'text-blue-700';
     }
+  
+    return (
+      <div className={`flex items-center space-x-2 px-2 py-1 rounded-md ${bgColor}`}>
+        {icon}
+        <span className={`font-medium text-xs ${textColor}`}>{status || 'Pending'}</span>
+      </div>
+    );
   };
+  
 
   const getPriorityIcon = (priority: string) => {
     const priorityOption = priorityOptions.find(option => option.value === priority);
