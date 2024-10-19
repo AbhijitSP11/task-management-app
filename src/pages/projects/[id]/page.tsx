@@ -4,13 +4,8 @@ import BoardView from '../BoardView';
 import ListView from '../ListView';
 import ProjectHeader from '../ProjectHeader';
 
-type Props = {
-    params : {id: string};
-};
-const Project = ({params}: Props) => {
-    const {id} = params;
+const Project = () => {
         const [activeTab, setActiveTab] = useState<string>("List");
-    
         return (
             <div>
                 <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab}/>

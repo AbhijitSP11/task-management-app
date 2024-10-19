@@ -4,14 +4,11 @@ import Image from 'next/image';
 import Search from '../Search';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setIsSidebarCollapsed } from '@/redux/slices/globalSlice';
-import { Task } from '@/schema/types';
 import { setFilteredTasks } from '@/redux/slices/taskSlice';
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
-  const allTasks = useAppSelector((state) => state.task.allTasks);
-
 
   const handleCloseSearch = () => {
     dispatch(setFilteredTasks([]));

@@ -19,14 +19,16 @@ const ListView = () => {
   };
 
   const sortedTasks = [...Tasks].sort((a, b) => {
-      if (!sortColumn) return 0;
+    if (!sortColumn) return 0;
 
-      let aValue = (a as any)[sortColumn];
-      let bValue = (b as any)[sortColumn];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const aValue = (a as any)[sortColumn];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const bValue = (b as any)[sortColumn];
 
-      if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-      if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
-      return 0;
+    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+    return 0;
   });
 
   const indexOfLastTask = currentPage * tasksPerPage;
