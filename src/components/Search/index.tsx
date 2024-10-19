@@ -47,6 +47,9 @@ const Search: React.FC<Props> = ({ onClose }) => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
+    if(term === ""){
+      dispatch(setSelectedTaskId(null));
+    }
     setSearchTerm(term);
     debouncedSearch(term);
   };
@@ -94,6 +97,7 @@ const Search: React.FC<Props> = ({ onClose }) => {
         setIsModalOpen(false);
         setSearchTerm('');
         setFilteredTasks([]);
+        dispatch(setSelectedTaskId(null));
       }}>
         <div className="p-4">
           <div className='flex items-center gap-2 mb-4'>
