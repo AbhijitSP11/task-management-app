@@ -10,6 +10,7 @@ import useTasks from '@/hooks/useTasks';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { setAllTasks } from '@/redux/slices/taskSlice';
 import { PlusCircle } from 'lucide-react';
+import Head from 'next/head';
 
 export default function Home ({ initialTasks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -57,6 +58,11 @@ export default function Home ({ initialTasks }: InferGetServerSidePropsType<type
   };
 
   return (
+    <>
+     <Head>
+        <title>Twello</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <div className='w-full px-4'>
       <div className="mb-4 flex items-center space-x-4">
         <button
@@ -93,6 +99,7 @@ export default function Home ({ initialTasks }: InferGetServerSidePropsType<type
         />
       )}
     </div>
+    </>
   );
 };
 
