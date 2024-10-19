@@ -1,13 +1,12 @@
-import { Grid3x3, Grid3X3, List } from 'lucide-react';
+import { Grid3x3, List } from 'lucide-react';
 import React from 'react'
 
 type Props = {
-    id: string;
     activeTab: string;
     setActiveTab: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ProjectHeader = ({activeTab, setActiveTab, id}: Props) => {
+const ProjectHeader = ({activeTab, setActiveTab}: Props) => {
   return (
     <div className='w-full flex items-center gap-4 border-y border-neutral-200 px-4 py-2'>
      <TabButton 

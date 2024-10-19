@@ -96,7 +96,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, onClose }) => {
             options={priorityOptions}
             onChange={handleSelectChange('priority')}
             className="mt-1 h-10 cursor-pointer"
-            formatOptionLabel={({ value, label, icon }) => (
+            formatOptionLabel={({ label, icon }) => (
               <div className="flex items-center">
                 {icon}
                 <span className="ml-2">{label}</span>
@@ -111,7 +111,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask, onClose }) => {
             onChange={handleSelectChange('status')}
             defaultValue={statusOptions[0]}
             className="mt-1 h-10 cursor-pointer"
-            formatOptionLabel={({ value, label, icon }) => (
+            formatOptionLabel={({ label, icon }) => (
               <div className="flex items-center">
                 {icon}
                 <span className="ml-2">{label}</span>

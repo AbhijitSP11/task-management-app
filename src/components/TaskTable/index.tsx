@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, ChevronUp, List, Calendar, User, Flag, TargetIcon, LucideTarget } from 'lucide-react';
+import { ChevronDown, ChevronUp, List, Calendar, User, Flag, LucideTarget } from 'lucide-react';
 import { Task } from '@/schema/types';
 import TaskRow from '../TaskRow';
 

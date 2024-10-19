@@ -10,16 +10,15 @@ type Props = {
 const Project = ({params}: Props) => {
     const {id} = params;
         const [activeTab, setActiveTab] = useState<string>("List");
-        const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState<boolean>(false);
     
         return (
             <div>
-                <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} id={id}/>
+                <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab}/>
                 {activeTab === "Board" && (
-                    <BoardView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+                    <BoardView/>
                 )}
                 {activeTab === "List" && (
-                    <ListView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+                    <ListView/>
                 )}
             </div>
     )

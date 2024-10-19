@@ -2,12 +2,8 @@ import { Tasks } from '@/schema/tasks';
 import React, { useState } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react'; 
 
-type Props = {
-    id: string
-    setIsModalNewTaskOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 
-const ListView = ({ id, setIsModalNewTaskOpen }: Props) => {
+const ListView = () => {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [currentPage, setCurrentPage] = useState(1);

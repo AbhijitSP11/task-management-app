@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Task } from '@/schema/types';
-import { Calendar, Edit2Icon, Edit3Icon, EditIcon, X } from 'lucide-react';
+import {  EditIcon, X } from 'lucide-react';
 import Select from 'react-select';
 import { priorityOptions, statusOptions } from '@/constants/constants';
 

@@ -4,8 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Twello</title>
-        
         <link rel="icon" href="/favicon.ico" />
         
         <meta name="description" content="Your app description" />

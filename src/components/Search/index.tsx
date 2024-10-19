@@ -3,7 +3,7 @@ import { setSelectedTaskId } from '@/redux/slices/taskSlice';
 import { Task } from '@/schema/types';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Modal from '../Modal';
-import { SearchIcon, Loader, Calendar, CheckCircle, ArrowUpCircle, AlertCircle, Clock, SearchCheckIcon } from 'lucide-react';
+import { SearchIcon, Loader, Calendar, CheckCircle, ArrowUpCircle, AlertCircle, Clock } from 'lucide-react';
 import debounce from 'lodash/debounce';
 
 interface Props {

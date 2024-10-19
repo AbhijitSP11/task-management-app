@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Briefcase, Settings, User, Users, AlertCircle, ShieldAlert, AlertTriangle, AlertOctagon, Layers3, ChevronDown, ChevronRight, LogOut } from 'lucide-react'
+import { Home, Briefcase, Settings, Users, AlertCircle, ShieldAlert, AlertTriangle, AlertOctagon, Layers3, ChevronDown, ChevronRight, LogOut } from 'lucide-react'
 import { LucideIcon } from 'lucide-react'
 import { useAppSelector } from '@/redux/hooks'
 

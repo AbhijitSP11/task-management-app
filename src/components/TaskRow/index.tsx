@@ -1,6 +1,6 @@
 import React from 'react';
 import { Task } from '@/schema/types';
-import { Edit, Trash2, CheckCircle, Clock, AlertCircle, ArrowUpCircle, CircleDot } from 'lucide-react';
+import { Edit, Trash2, CheckCircle, Clock, AlertCircle, ArrowUpCircle } from 'lucide-react';
 import { priorityOptions } from '@/constants/constants';
 
 interface TaskRowProps {

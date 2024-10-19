@@ -1,11 +1,7 @@
 import React from 'react'
 
-type Props = {
-    id: string
-    setIsModalNewTaskOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 
-const BoardView = ({id, setIsModalNewTaskOpen}: Props) => {
+const BoardView = () => {
   return (
     <div>BoardView</div>
   )

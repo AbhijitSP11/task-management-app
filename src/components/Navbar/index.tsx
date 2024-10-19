@@ -12,14 +12,6 @@ const Navbar = () => {
   const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
   const allTasks = useAppSelector((state) => state.task.allTasks);
 
-  const handleTaskSelect = (searchTerm: string) => {
-    const filteredTasks = allTasks.filter((task: Task) => 
-      task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      task?.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      false
-    );
-    dispatch(setFilteredTasks(filteredTasks));
-  };
 
   const handleCloseSearch = () => {
     dispatch(setFilteredTasks([]));
