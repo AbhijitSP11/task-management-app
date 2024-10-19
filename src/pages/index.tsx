@@ -6,7 +6,6 @@ import Pagination from '@/components/Pagination';
 import Modal from '@/components/Modal';
 import TaskForm from '@/components/TaskForm';
 import EditTaskModal from '@/components/EditTaskModal';
-import useTasks from '@/hooks/useTasks';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { setAllTasks } from '@/redux/slices/taskSlice';
 import { PlusCircle } from 'lucide-react';

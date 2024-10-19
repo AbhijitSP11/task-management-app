@@ -13,7 +13,7 @@ const InProgressPage = () => {
               Coding in <span className="text-indigo-600">Progress</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8">
-              The developer is working the magic. He's turning coffee into code to bring you something amazing!
+              The developer is working the magic. He&apos;s turning coffee into code to bring you something amazing!
             </p>
             <Link 
               href="/" 
