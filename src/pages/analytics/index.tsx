@@ -41,7 +41,7 @@ const Analytics = () => {
   const [totalProjects, setTotalProjects] = useState(0);
 
   useEffect(() => {
-    const completed = Tasks.filter(task => task.status === "Done").length;
+    const completed = Tasks.filter(task => task.status === "Completed").length;
     const inProgress = Tasks.filter(task => task.status === "In Progress").length;
     const projects = new Set(Tasks.map(task => task.projectId)).size;
 
