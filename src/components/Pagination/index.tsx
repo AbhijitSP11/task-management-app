@@ -8,7 +8,7 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   return (
-    <div className="w-full border-y border-gray-300 p-2 flex justify-center items-center mt-6">
+    <div className="w-full border-y border-gray-300 p-2 flex justify-center items-center mt-2">
       <ul className="flex list-none space-x-2">
         <li>
           <button

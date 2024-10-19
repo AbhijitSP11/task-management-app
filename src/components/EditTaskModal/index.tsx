@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Task } from '@/schema/types';
-import { Calendar, X } from 'lucide-react';
+import { Calendar, Edit2Icon, Edit3Icon, EditIcon, X } from 'lucide-react';
 import Select from 'react-select';
 import { priorityOptions, statusOptions } from '@/constants/constants';
 
@@ -50,7 +50,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ task, onClose, onSave }) 
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
           <X className="w-6 h-6" />
         </button>
-        <h2 className="text-2xl font-bold mb-4">Edit Task</h2>
+        <div className='flex items-center gap-2 mb-4'>
+        <span><EditIcon className='size-6 text-indigo-500'/></span>
+        <h2 className="text-xl font-semibold text-gray-600">Edit Task</h2>
+      </div>
         <form className="space-y-6">
           {/* Title */}
           <div>

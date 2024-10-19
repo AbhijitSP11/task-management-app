@@ -8,8 +8,8 @@ import { useAppSelector } from '@/redux/hooks'
 
 const SIDEBAR_LINKS = [
   { href: "/", icon: Home, label: "Dashboard" },
-  { href: "/projects", icon: Briefcase, label: "Projects" },
   { href: "/tasks", icon: Layers3, label: "Tasks" },
+  { href: "/projects", icon: Briefcase, label: "Projects" },
   { href: "/teams", icon: Users, label: "Teams" },
   { href: "/settings", icon: Settings, label: "Settings" },
 ]
